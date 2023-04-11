@@ -1,7 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Image, LayoutAnimation, Linking, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import cls from 'classnames';
 import { formatPhone, replaceBlank } from 'utils/StringUtil';
 
@@ -17,14 +15,18 @@ import icon_exchange from 'assets/icon_exchange.png';
 import icon_wx from 'assets/icon_wx.png';
 import icon_qq from 'assets/icon_qq.webp';
 import icon_close_modal from 'assets/icon_close_modal.png';
+import { useUserInfo } from 'stores';
 
 const Login = () => {
+  // 局部状态不用放到全局存储
   const [loginType, setLoginType] = useState<'quick' | 'input'>('quick');
   const [check, setCheck] = useState<boolean>(false);
   const [eyeOpen, setEyeOpen] = useState<boolean>(false);
-  const navigation = useNavigation<StackNavigationProp<any>>();
   const [phone, setPhone] = useState<string>('');
   const [pwd, setPwd] = useState<string>('');
+
+  // 引入登陆
+  const { userLogin } = useUserInfo();
 
   const handleEye = useCallback(() => {
     setEyeOpen((prevState) => !prevState);
@@ -47,17 +49,14 @@ const Login = () => {
 
   // 能否登陆，需要满足三个条件
   const canLogin = useMemo<boolean>(
-    () => check && phone.length === 13 && pwd.length > 6,
+    () => check && phone.length === 13 && pwd.length >= 6,
     [check, phone.length, pwd.length]
   );
 
-  const goToHomePage = useCallback(() => {
+  const goToHomePage = useCallback(async () => {
     const realPhone = replaceBlank(phone);
-    console.log('realPhone: %s', realPhone);
-
-    // 登陆页面到首页，一定是替换，不能出现回退。
-    navigation.replace('Home');
-  }, [navigation, phone]);
+    await userLogin(realPhone, pwd);
+  }, [phone, pwd, userLogin]);
 
   const renderQuickLogin = useMemo(() => {
     return (
