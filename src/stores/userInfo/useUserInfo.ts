@@ -4,7 +4,7 @@ import { ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { userInfoAtom, userInfoDefault, UserInfoType } from 'stores/userInfo';
+import { userInfoAtom, userInfoDefault, UserInfoType } from './userInfo';
 import { request } from 'core/request';
 import { atomStorageClear } from 'core/atom';
 
@@ -31,11 +31,6 @@ const useUserInfo = (): UserInfoHookType => {
   const [loading, setLoading] = useState(false);
   // 路由相关
   const navigation = useNavigation<StackNavigationProp<any>>();
-
-  /** 如果是带初始化的数据，可以通过 useEffect 来处理*/
-  useEffect(() => {
-    console.log('当前的数据：%o', userInfo);
-  }, [userInfo]);
 
   /** 重置为默认值 */
   const resetUserInfo = useCallback(() => {
