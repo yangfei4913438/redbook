@@ -6,8 +6,8 @@ import { useHomeList, type ArticleSimple } from 'stores';
 import FlowList from 'components/flowlist/FlowList';
 // 图片自适应高度组件，配合瀑布流组件使用
 import ResizeImage from 'components/ResizeImage';
-
-import icon_heart_empty from 'assets/icon_heart_empty.png';
+// 自定义点赞组件
+import Heart from 'components/Heart';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -36,7 +36,7 @@ const Home = () => {
               <Text className="text-[12px] text-[#999] ml-1.5 flex-1" numberOfLines={1} ellipsizeMode={'tail'}>
                 {item.userName}
               </Text>
-              <Image source={icon_heart_empty} className="w-5 h-5 rounded-[10px]" />
+              <Heart value={item.isFavorite} onValueChanged={(value) => console.log(value)} />
               <Text className="text-sm text-[#999] ml-1.5">{item.favoriteCount}</Text>
             </View>
           </View>
