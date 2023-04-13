@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useAtom } from 'jotai';
 import { ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';

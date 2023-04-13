@@ -83,7 +83,7 @@ const Login = () => {
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.7}
-          className="mb-5 flex-row items-center justify-center w-full h-14 bg-[#ff2442] rounded-3xl space-x-1"
+          className="mb-5 flex-row items-center justify-center w-full h-14 bg-xhs rounded-3xl space-x-1"
         >
           <Text className="text-lg text-white">一键登陆</Text>
         </TouchableOpacity>
