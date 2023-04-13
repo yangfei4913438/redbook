@@ -6,6 +6,8 @@
     /* Completeness */
     "skipLibCheck": true,   /* Skip type checking all .d.ts files. */
 
+    "allowJs": true,
+
     /* 配置基础地址 */
     "baseUrl": ".",
     /* 配置路径别名 */

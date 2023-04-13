@@ -1,6 +1,12 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
-import { Dimensions, FlatList, Image, ListRenderItem, Text, View } from 'react-native';
+import { Dimensions, Image, ListRenderItem, Text, View } from 'react-native';
 import { useHomeList, type ArticleSimple } from 'stores';
+
+// 使用自定义瀑布流组件，替代无限加载列表组件
+import FlowList from 'components/flowlist/FlowList';
+// 图片自适应高度组件，配合瀑布流组件使用
+import ResizeImage from 'components/ResizeImage';
+
 import icon_heart_empty from 'assets/icon_heart_empty.png';
 
 const { width: screenWidth } = Dimensions.get('window');
@@ -18,8 +24,8 @@ const Home = () => {
     () =>
       ({ item }) => {
         return (
-          <View className="ml-1.5 mb-1.5 rounded-md overflow-hidden" style={{ width: (screenWidth - 18) >> 1 }}>
-            <Image source={{ uri: item.image }} className="w-full h-64" />
+          <View className="ml-1.5 mb-1.5 rounded-md overflow-hidden" style={{ width: (screenWidth - 18) / 2 }}>
+            <ResizeImage uri={item.image} />
             <Text className="text-sm font-bold text-[#333] px-3 py-1">{item.title}</Text>
             <View className="flex-row w-full items-center px-3 mb-3">
               <Image
@@ -57,11 +63,10 @@ const Home = () => {
 
   return (
     <View className="w-full h-full bg-[#f0f0f0] justify-center items-center">
-      <FlatList
+      <FlowList
         className="w-full h-full mt-1.5"
         data={homeList}
         renderItem={renderItem}
-        keyExtractor={(_, index) => `item-${index}`}
         showsVerticalScrollIndicator={false} // 是否显示纵向滚动条
         inverted={false} // 是否反向渲染（倒序排列）
         numColumns={2} // 一行渲染几列，注意样式
