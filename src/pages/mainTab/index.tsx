@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs/src/types';
 import { launchImageLibrary } from 'react-native-image-picker';
@@ -85,15 +84,13 @@ const BottomTab = createBottomTabNavigator();
 const MainTab = () => {
   return (
     <View className="w-full h-full">
-      <NavigationContainer>
-        <BottomTab.Navigator tabBar={(props) => <TabBar {...props} />}>
-          <BottomTab.Screen name={'Home'} component={Home} options={{ title: '首页', headerShown: false }} />
-          <BottomTab.Screen name={'Shop'} component={Shop} options={{ title: '购物', headerShown: false }} />
-          <BottomTab.Screen name={'Publish'} component={Shop} options={{ title: '发布', headerShown: false }} />
-          <BottomTab.Screen name={'Message'} component={Message} options={{ title: '消息', headerShown: false }} />
-          <BottomTab.Screen name={'Mine'} component={Mine} options={{ title: '我', headerShown: false }} />
-        </BottomTab.Navigator>
-      </NavigationContainer>
+      <BottomTab.Navigator tabBar={(props) => <TabBar {...props} />}>
+        <BottomTab.Screen name={'Home'} component={Home} options={{ title: '首页', headerShown: false }} />
+        <BottomTab.Screen name={'Shop'} component={Shop} options={{ title: '购物', headerShown: false }} />
+        <BottomTab.Screen name={'Publish'} component={Shop} options={{ title: '发布', headerShown: false }} />
+        <BottomTab.Screen name={'Message'} component={Message} options={{ title: '消息', headerShown: false }} />
+        <BottomTab.Screen name={'Mine'} component={Mine} options={{ title: '我', headerShown: false }} />
+      </BottomTab.Navigator>
     </View>
   );
 };
