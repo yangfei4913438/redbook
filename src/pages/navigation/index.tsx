@@ -4,8 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import Welcome from 'pages/welcome';
 import Login from 'pages/login';
-import Home from 'pages/home';
-import Shop from 'pages/shop';
+import MainTab from 'pages/mainTab';
 
 const Stack = createStackNavigator();
 
@@ -27,16 +26,8 @@ const Navigation = () => {
           }}
         />
         <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{
-            headerShown: false,
-            ...TransitionPresets.SlideFromRightIOS, // IOS风格的动画
-          }}
-        />
-        <Stack.Screen
-          name="Shop"
-          component={Shop}
+          name="MainTab"
+          component={MainTab}
           options={{
             headerShown: false,
             ...TransitionPresets.SlideFromRightIOS, // IOS风格的动画

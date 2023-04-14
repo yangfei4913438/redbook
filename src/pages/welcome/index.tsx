@@ -13,7 +13,7 @@ const Welcome = () => {
 
   useEffect(() => {
     // 执行页面跳转
-    const goPage = (name: 'Home' | 'Login') => {
+    const goPage = (name: 'MainTab' | 'Login') => {
       LayoutAnimation.easeInEaseOut();
       // 存在登陆信息，跳转首页
       // 这个页面不能回来，所以这里是替换.
@@ -27,7 +27,7 @@ const Welcome = () => {
     // 判断是否存在用户信息
     if (userInfo && userInfo.redBookId > 0) {
       // 存在用户信息，跳转首页
-      timer = setTimeout(() => goPage('Home'), delay);
+      timer = setTimeout(() => goPage('MainTab'), delay);
     } else {
       // 不存在用户信息，跳转登陆页
       timer = setTimeout(() => goPage('Login'), delay);

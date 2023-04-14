@@ -82,7 +82,7 @@ const TabBar = (props: BottomTabBarProps) => {
 
 const BottomTab = createBottomTabNavigator();
 
-const BottomTabs = () => {
+const MainTab = () => {
   return (
     <View className="w-full h-full">
       <NavigationContainer>
@@ -98,4 +98,4 @@ const BottomTabs = () => {
   );
 };
 
-export default BottomTabs;
+export default MainTab;

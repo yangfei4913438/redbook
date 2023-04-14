@@ -5,6 +5,7 @@ import { atomStorageClear } from 'core/atom';
 import { homeListAtom, ArticleSimple } from './homeList';
 import { request } from 'core/request';
 import { arrayConcatBy } from 'utils/array';
+import Loading from 'components/widget/Loading';
 
 const useHomeList = () => {
   const [homeList, setHomeList] = useAtom(homeListAtom);
@@ -22,11 +23,13 @@ const useHomeList = () => {
       // 正在网络请求的时候，不要重复发网络请求。
       if (loading) return;
       // 开始请求数据
+      Loading.show();
       setLoading(() => true);
       // 如果已经是最后一页了, 且当前请求不是重置数据，就不用处理了。直接返回即可。
       if (isLastPage && !reset) {
         console.log('当前是最后一页，不继续执行');
         setLoading(() => false);
+        Loading.hide();
         return;
       }
       try {
@@ -77,6 +80,7 @@ const useHomeList = () => {
       } finally {
         console.log('完成数据请求');
         setLoading(() => false);
+        Loading.hide();
       }
     },
     [isLastPage, loading, page, pageSize, setHomeList]

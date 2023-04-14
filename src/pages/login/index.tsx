@@ -1,7 +1,11 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Image, LayoutAnimation, Linking, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import cls from 'classnames';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+
 import { formatPhone, replaceBlank } from 'utils/StringUtil';
+import { useUserInfo } from 'stores';
 
 import main_logo from 'assets/icon_main_logo.png';
 import icon_unselected from 'assets/icon_unselected.png';
@@ -15,7 +19,8 @@ import icon_exchange from 'assets/icon_exchange.png';
 import icon_wx from 'assets/icon_wx.png';
 import icon_qq from 'assets/icon_qq.webp';
 import icon_close_modal from 'assets/icon_close_modal.png';
-import { useUserInfo } from 'stores';
+
+import Toast from 'components/widget/Toast';
 
 const Login = () => {
   // 局部状态不用放到全局存储
@@ -24,6 +29,8 @@ const Login = () => {
   const [eyeOpen, setEyeOpen] = useState<boolean>(false);
   const [phone, setPhone] = useState<string>('');
   const [pwd, setPwd] = useState<string>('');
+  // 路由相关
+  const navigation = useNavigation<StackNavigationProp<any>>();
 
   // 引入登陆
   const { userLogin } = useUserInfo();
@@ -55,8 +62,15 @@ const Login = () => {
 
   const goToHomePage = useCallback(async () => {
     const realPhone = replaceBlank(phone);
-    await userLogin(realPhone, pwd);
-  }, [phone, pwd, userLogin]);
+    await userLogin(realPhone, pwd, (ok) => {
+      if (ok) {
+        // 登陆页面到首页，一定是替换，不能出现回退。
+        navigation.replace('MainTab');
+      } else {
+        Toast.show('登陆失败，请检查用户名和密码');
+      }
+    });
+  }, [navigation, phone, pwd, userLogin]);
 
   const renderQuickLogin = useMemo(() => {
     return (
