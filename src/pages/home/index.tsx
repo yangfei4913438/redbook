@@ -16,9 +16,13 @@ import CategoryList from './components/categoryList';
 const { width: screenWidth } = Dimensions.get('window');
 
 const Home = () => {
+  // 分类数据
   const { categoryList } = useCategoryList();
+  // 首页列表数据
   const { homeList, loading, requestHomeList, isLastPage } = useHomeList();
+  // 选中的tab
   const [activeTab, setActiveTab] = useState<number>(0);
+  // 选中的标签
   const [activeCategory, setActiveCategory] = useState<CategoryType>(categoryList[0]);
 
   /** 初始化数据*/

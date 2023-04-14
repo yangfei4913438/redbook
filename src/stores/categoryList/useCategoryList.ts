@@ -1,12 +1,10 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { atomStorageClear } from 'core/atom';
-import { categoryListAtom, categoryListDefault } from 'stores/categoryList/categoryList';
+import { categoryListAtom, categoryListDefault, CategoryType } from 'stores/categoryList/categoryList';
 import { useAtom } from 'jotai';
 
 const useCategoryList = () => {
   const [categoryList, setCategoryList] = useAtom(categoryListAtom);
-  // 发生网络请求时，当前的处理状态
-  const [loading, setLoading] = useState(false);
 
   /** 重置为默认值 */
   const resetCategoryList = useCallback(() => {
@@ -18,11 +16,36 @@ const useCategoryList = () => {
     atomStorageClear(setCategoryList);
   }, [setCategoryList]);
 
-  /** 发起网络请求 */
+  /** 用户选中的标签列表 */
+  const myCategoryList = useMemo(() => {
+    return categoryList.filter((category) => category.isAdd);
+  }, [categoryList]);
+
+  /** 用户没选中的标签列表 */
+  const otherCategoryList = useMemo(() => {
+    return categoryList.filter((category) => !category.isAdd);
+  }, [categoryList]);
+
+  /** 更新分类tag */
+  const updateCategory = useCallback(
+    (item: CategoryType) => {
+      setCategoryList((prev) => {
+        return prev.map((p) => {
+          if (p.name === item.name) {
+            return item;
+          }
+          return p;
+        });
+      });
+    },
+    [setCategoryList]
+  );
 
   return {
-    loading,
     categoryList,
+    myCategoryList,
+    otherCategoryList,
+    updateCategory,
     resetCategoryList,
     clearCategoryListStorage,
   };
