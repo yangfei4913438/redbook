@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Dimensions, Image, ListRenderItem, Text, TouchableOpacity, View } from 'react-native';
-import { useHomeList, type ArticleSimple, CategoryType, useCategoryList } from 'stores';
+import { useHomeList, type ArticleSimpleType, CategoryType, useCategoryList } from 'stores';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
@@ -44,7 +44,7 @@ const Home = () => {
 
   /** 跳转详情页 */
   const onArticlePress = useCallback(
-    (article: ArticleSimple) => () => {
+    (article: ArticleSimpleType) => () => {
       // 先尝试获取详情
       requestArticleDetail(article.id, (ok) => {
         if (ok) {
@@ -59,7 +59,7 @@ const Home = () => {
     [navigation, requestArticleDetail]
   );
 
-  const renderItem: ListRenderItem<ArticleSimple> = useMemo(
+  const renderItem: ListRenderItem<ArticleSimpleType> = useMemo(
     () =>
       ({ item }) => {
         return (
@@ -115,7 +115,7 @@ const Home = () => {
         className="w-full h-full"
         data={homeList}
         renderItem={renderItem}
-        keyExtractor={(item: ArticleSimple, index: number) => `${item.id}-${index}`}
+        keyExtractor={(item: ArticleSimpleType, index: number) => `${item.id}-${index}`}
         showsVerticalScrollIndicator={false} // 是否显示纵向滚动条
         inverted={false} // 是否反向渲染（倒序排列）
         numColumns={2} // 一行渲染几列，注意样式

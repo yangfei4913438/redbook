@@ -1,7 +1,7 @@
 import { atomStorage } from 'core/atom';
 
 /** 首页列表的数据类型定义 */
-export interface ArticleSimple {
+export interface ArticleSimpleType {
   /** 文章ID */
   id: number;
   /** 文章标题 */
@@ -22,7 +22,7 @@ export interface ArticleSimple {
 export const homeListStorageKey: string = 'HomeList';
 
 /** 首页列表默认值 */
-export const homeListDefault: ArticleSimple[] = [];
+export const homeListDefault: ArticleSimpleType[] = [];
 
 /** 首页列表的数据原子对象 */
-export const homeListAtom = atomStorage<ArticleSimple[]>(homeListStorageKey, homeListDefault, true);
+export const homeListAtom = atomStorage<ArticleSimpleType[]>(homeListStorageKey, homeListDefault, true);

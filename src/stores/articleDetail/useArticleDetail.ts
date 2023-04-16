@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai';
-import { articleDetailAtom, articleDetailDefault, ArticleDetailType } from './articleDetail';
+import { articleDetailAtom, articleDetailDefault, type ArticleDetailType } from './articleDetail';
 import { useCallback, useMemo } from 'react';
 import { atomStorageClear } from 'core/atom';
 import Loading from 'components/widget/Loading';

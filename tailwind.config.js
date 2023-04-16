@@ -24,6 +24,7 @@ const size = {
   20: '80px',
   24: '96px',
   28: '112px',
+  half: '50%',
 };
 
 /** @type {import('tailwindcss').Config} */
@@ -51,6 +52,7 @@ module.exports = {
         secondary: '#999', // 浅色文字
         third: '#666', // 普通颜色
         line: '#eee', // 边框线的颜色
+        darkLine: '#bbb', // 深色的边框线
       },
       backgroundColor: {
         xhs: '#ff2442', // 小红书主色调
