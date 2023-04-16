@@ -1,4 +1,5 @@
 const size = {
+  mini: '1px',
   2: '12px',
   '2p5': '13px', // 使用小数点，在部分IDE中会造成解析异常，导致后面的提示出错，所以改成英文字符
   3: '14px',
@@ -47,8 +48,9 @@ module.exports = {
       colors: {
         xhs: '#ff2442', // 小红书主色调
         primary: '#333', // 深色文字
-        secondary: '#999', // 文字
-        third: '#666',
+        secondary: '#999', // 浅色文字
+        third: '#666', // 普通颜色
+        line: '#eee', // 边框线的颜色
       },
       backgroundColor: {
         xhs: '#ff2442', // 小红书主色调
@@ -56,10 +58,7 @@ module.exports = {
         secondary: '#eee', // 次要背景色
         transparent: '#00000060', // 透明背景
       },
-      borderRadius: {
-        mini: '1px',
-        ...size,
-      },
+      borderRadius: size,
       fontSize: size,
       width: size,
       minWidth: size,

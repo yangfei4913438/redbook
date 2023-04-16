@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Welcome from 'pages/welcome';
 import Login from 'pages/login';
 import MainTab from 'pages/mainTab';
+import ArticleDetail from 'pages/articleDetail';
 
 const Stack = createStackNavigator();
 
@@ -19,15 +20,23 @@ const Navigation = () => {
       >
         <Stack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
         <Stack.Screen
-          name="Login"
+          name="Login" // 登陆页
           component={Login}
           options={{
             headerShown: false, // 不显示默认标题栏
           }}
         />
         <Stack.Screen
-          name="MainTab"
+          name="MainTab" // 首页
           component={MainTab}
+          options={{
+            headerShown: false,
+            ...TransitionPresets.SlideFromRightIOS, // IOS风格的动画
+          }}
+        />
+        <Stack.Screen
+          name="ArticleDetail" // 文章详情
+          component={ArticleDetail}
           options={{
             headerShown: false,
             ...TransitionPresets.SlideFromRightIOS, // IOS风格的动画

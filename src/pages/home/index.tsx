@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Dimensions, Image, ListRenderItem, Text, View } from 'react-native';
+import { Dimensions, Image, ListRenderItem, Text, TouchableOpacity, View } from 'react-native';
 import { useHomeList, type ArticleSimple, CategoryType, useCategoryList } from 'stores';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 // 使用自定义瀑布流组件，替代无限加载列表组件
 import FlowList from 'components/flowlist/FlowList';
@@ -12,6 +14,10 @@ import Heart from 'components/Heart';
 import TitleBar from './components/titleBar';
 // 分类列表
 import CategoryList from './components/categoryList';
+// 提示组件
+import Toast from 'components/widget/Toast';
+// 文章详情hooks
+import { useArticleDetail } from 'stores';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -24,6 +30,11 @@ const Home = () => {
   const [activeTab, setActiveTab] = useState<number>(0);
   // 选中的标签
   const [activeCategory, setActiveCategory] = useState<CategoryType>(categoryList[0]);
+  // 请求页面详情的方法
+  const { requestArticleDetail } = useArticleDetail();
+
+  // 路由相关
+  const navigation = useNavigation<StackNavigationProp<any>>();
 
   /** 初始化数据*/
   useEffect(() => {
@@ -31,11 +42,32 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  /** 跳转详情页 */
+  const onArticlePress = useCallback(
+    (article: ArticleSimple) => () => {
+      // 先尝试获取详情
+      requestArticleDetail(article.id, (ok) => {
+        if (ok) {
+          // 获取到页面详情之后，再跳转路由
+          navigation.push('ArticleDetail', { id: article.id });
+        } else {
+          // 异常提示
+          Toast.show('获取文章详情失败，请稍后再试');
+        }
+      });
+    },
+    [navigation, requestArticleDetail]
+  );
+
   const renderItem: ListRenderItem<ArticleSimple> = useMemo(
     () =>
       ({ item }) => {
         return (
-          <View className="ml-1.5 mb-1.5 rounded-md overflow-hidden" style={{ width: (screenWidth - 18) / 2 }}>
+          <TouchableOpacity
+            className="ml-1.5 mb-1.5 rounded-md overflow-hidden"
+            style={{ width: (screenWidth - 18) / 2 }}
+            onPress={onArticlePress(item)}
+          >
             <ResizeImage uri={item.image} />
             <Text className="text-sm text-primary px-3 py-1">{item.title}</Text>
             <View className="flex-row w-full items-center px-3 mb-3">
@@ -50,10 +82,10 @@ const Home = () => {
               <Heart value={item.isFavorite} onValueChanged={(value) => console.log(value)} />
               <Text className="text-sm text-secondary ml-1.5">{item.favoriteCount}</Text>
             </View>
-          </View>
+          </TouchableOpacity>
         );
       },
-    []
+    [onArticlePress]
   );
 
   const resetData = useCallback(async () => {

@@ -1,5 +1,7 @@
+import { atomStorage } from 'core/atom';
+
 /** 文章的数据结构 */
-export interface Article {
+export interface ArticleDetailType {
   /** 文章ID */
   id: number;
   /** 文章标题 */
@@ -31,11 +33,11 @@ export interface Article {
   /** 这篇文章你有没有收藏 */
   isCollection: boolean;
   /** 文章的评论 */
-  comments?: ArticleComment[];
+  comments?: ArticleCommentType[];
 }
 
 /** 文章评论的数据结构 */
-export interface ArticleComment {
+export interface ArticleCommentType {
   /** 评论者的名称 */
   userName: string;
   /** 评论者的头像 */
@@ -51,5 +53,30 @@ export interface ArticleComment {
   /** 评论你是否点赞了 */
   isFavorite: boolean;
   /** 评论的评论 */
-  children?: ArticleComment[];
+  children?: ArticleCommentType[];
 }
+
+/** 文章详情数据，在浏览器存储中的存储key */
+export const articleDetailStorageKey: string = 'ArticleDetail';
+
+// 文章详情的默认值
+export const articleDetailDefault: ArticleDetailType = {
+  id: -1, // -1 表示默认空值
+  avatarUrl: '',
+  collectionCount: 0,
+  dateTime: '',
+  desc: '',
+  favoriteCount: 0,
+  images: [],
+  isCollection: false,
+  isFavorite: false,
+  isFollow: false,
+  location: '',
+  tag: [],
+  title: '',
+  userId: '',
+  userName: '',
+};
+
+/** 文章详情的数据原子对象 */
+export const articleDetailAtom = atomStorage<ArticleDetailType>(articleDetailStorageKey, articleDetailDefault, true);

@@ -34,6 +34,7 @@ const useUserInfo = () => {
           setUserInfo(data);
           callback?.(true);
         } else {
+          console.error('返回的用户信息为空');
           resetUserInfo();
           callback?.(false);
         }
