@@ -1,19 +1,19 @@
 import React, { useState, forwardRef, useImperativeHandle, useCallback, type PropsWithChildren } from 'react';
 import { Modal, StyleProp, View, ViewStyle } from 'react-native';
 
-interface CategoryModelProps extends PropsWithChildren {
+interface CustomModelProps extends PropsWithChildren {
   statusBarTranslucent?: boolean;
   animationType?: 'none' | 'slide' | 'fade';
   onSave?: () => void;
   style?: StyleProp<ViewStyle>;
 }
 
-export interface CategoryModelResult {
+export interface CustomModelResult {
   show: () => void;
   hide: () => void;
 }
 
-const CategoryModel = forwardRef<CategoryModelResult, CategoryModelProps>(
+const CustomModel = forwardRef<CustomModelResult, CustomModelProps>(
   ({ children, style, animationType = 'fade', onSave = () => undefined }, ref) => {
     const [visible, setVisible] = useState(false);
 
@@ -41,12 +41,11 @@ const CategoryModel = forwardRef<CategoryModelResult, CategoryModelProps>(
         statusBarTranslucent={true}
       >
         <View className="w-full h-full" style={style}>
-          <View className="w-full h-[80%]">{children}</View>
-          <View className="w-full h-[20%] bg-transparent-60" />
+          {children}
         </View>
       </Modal>
     );
   }
 );
 
-export default CategoryModel;
+export default CustomModel;

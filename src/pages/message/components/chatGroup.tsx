@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
-import MenuModel, { MenuModelResult } from './menuModel';
 import icon_group from 'assets/icon_group.png';
 import icon_create_group from 'assets/icon_create_group.png';
+import CustomModel, { type CustomModelResult } from 'components/customModel';
 
 const ChatGroup = () => {
-  const modelRef = useRef<MenuModelResult>(null);
+  const modelRef = useRef<CustomModelResult>(null);
   const [top, setTop] = useState<number>(0);
 
   return (
@@ -25,7 +25,7 @@ const ChatGroup = () => {
         <Text className="text-primary">群聊</Text>
       </TouchableOpacity>
 
-      <MenuModel ref={modelRef}>
+      <CustomModel ref={modelRef}>
         <TouchableOpacity
           className="w-full h-full bg-transparent-60"
           onPress={() => {
@@ -50,7 +50,7 @@ const ChatGroup = () => {
             </TouchableOpacity>
           </TouchableOpacity>
         </TouchableOpacity>
-      </MenuModel>
+      </CustomModel>
     </>
   );
 };

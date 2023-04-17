@@ -16,8 +16,9 @@ import { type CategoryType, useCategoryList } from 'stores';
 
 import icon_delete from 'assets/icon_delete.png';
 import icon_arrow from 'assets/icon_arrow.png';
-import CategoryModel, { type CategoryModelResult } from './categoryModel';
 import cls from 'classnames';
+
+import CustomModel, { type CustomModelResult } from 'components/customModel';
 
 const { width: ScreenWidth } = Dimensions.get('window');
 
@@ -29,7 +30,7 @@ interface CategoryListProps {
 const CategoryList: FC<CategoryListProps> = ({ activeCategory, setActiveCategory }) => {
   const { myCategoryList, otherCategoryList, updateCategory } = useCategoryList();
   const categoryRef = useRef<FlatList>(null);
-  const modelRef = useRef<CategoryModelResult>(null);
+  const modelRef = useRef<CustomModelResult>(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const OnCategoryPress = useCallback(
@@ -177,12 +178,15 @@ const CategoryList: FC<CategoryListProps> = ({ activeCategory, setActiveCategory
         <Image source={icon_arrow} className="w-4p5 h-4p5 -rotate-90" />
       </TouchableOpacity>
 
-      <CategoryModel ref={modelRef} style={{ marginTop: modelTop }}>
-        <ScrollView className="w-full h-full bg-white" showsVerticalScrollIndicator={false}>
-          {selectedTags}
-          {unSelectedTags}
-        </ScrollView>
-      </CategoryModel>
+      <CustomModel ref={modelRef} style={{ marginTop: modelTop }}>
+        <View className="w-full h-[80%]">
+          <ScrollView className="w-full h-full bg-white" showsVerticalScrollIndicator={false}>
+            {selectedTags}
+            {unSelectedTags}
+          </ScrollView>
+        </View>
+        <View className="w-full h-[20%] bg-transparent-60" />
+      </CustomModel>
     </View>
   );
 };
