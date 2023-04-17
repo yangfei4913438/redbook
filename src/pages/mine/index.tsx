@@ -3,7 +3,6 @@ import { Image, RefreshControl, ScrollView, Text, TouchableOpacity, View } from 
 import { useAccountInfo, useCollectionList, useFavorateList, useNoteList, useUserInfo } from 'stores';
 
 import icon_mine_bg from 'assets/icon_mine_bg.png';
-import icon_menu from 'assets/icon_menu.png';
 import icon_shop_car from 'assets/icon_shop_car.png';
 import icon_share from 'assets/icon_share.png';
 import icon_qrcode from 'assets/icon_qrcode.png';
@@ -16,6 +15,7 @@ import MineBar from 'pages/mine/components/mineBar';
 import NoteList from 'pages/mine/components/noteList';
 import CollectionList from 'pages/mine/components/collectionList';
 import FavorateList from 'pages/mine/components/favorateList';
+import SideMenu from 'pages/mine/components/sideMenu';
 
 const Mine = () => {
   const { userInfo } = useUserInfo();
@@ -34,9 +34,7 @@ const Mine = () => {
   const renderTitle = useMemo(() => {
     return (
       <View className="w-full h-12 flex-row items-center">
-        <TouchableOpacity className="h-full px-4 justify-center">
-          <Image source={icon_menu} className="w-7 h-7" resizeMode={'contain'} />
-        </TouchableOpacity>
+        <SideMenu />
         <View className="flex-1" />
         <TouchableOpacity className="mr-3">
           <Image source={icon_shop_car} className="w-7 h-7" resizeMode={'contain'} style={{ tintColor: 'white' }} />
@@ -49,6 +47,8 @@ const Mine = () => {
   }, []);
 
   const renderUserInfo = useMemo(() => {
+    // 用户不存在的时候，返回一个空dom
+    if (userInfo.redBookId === -1) return <></>;
     return (
       <View
         onLayout={(event) => {

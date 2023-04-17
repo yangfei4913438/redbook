@@ -2,6 +2,8 @@ import React, { useState, forwardRef, useImperativeHandle, useCallback, type Pro
 import { Modal, StyleProp, View, ViewStyle } from 'react-native';
 
 interface CustomModelProps extends PropsWithChildren {
+  /** 是否启用回退关闭 */
+  backClose?: boolean;
   statusBarTranslucent?: boolean;
   animationType?: 'none' | 'slide' | 'fade';
   onSave?: () => void;
@@ -14,7 +16,7 @@ export interface CustomModelResult {
 }
 
 const CustomModel = forwardRef<CustomModelResult, CustomModelProps>(
-  ({ children, style, animationType = 'fade', onSave = () => undefined }, ref) => {
+  ({ children, backClose = true, style, animationType = 'fade', onSave = () => undefined }, ref) => {
     const [visible, setVisible] = useState(false);
 
     const showModal = useCallback(() => {
@@ -35,7 +37,7 @@ const CustomModel = forwardRef<CustomModelResult, CustomModelProps>(
     return (
       <Modal
         visible={visible}
-        onRequestClose={hideModal}
+        onRequestClose={backClose ? hideModal : undefined}
         animationType={animationType}
         transparent={true}
         statusBarTranslucent={true}
