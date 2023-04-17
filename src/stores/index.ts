@@ -10,6 +10,10 @@ import useGoodsList from 'stores/goodsList/useGoodsList';
 import type { GoodsSimpleType } from 'stores/goodsList/goodsList';
 import useGoodsCategoryList from 'stores/goodsCategoryList/useGoodsCategoryList';
 import type { GoodsCategoryType } from 'stores/goodsCategoryList/goodsCategoryList';
+import useMessageList from 'stores/messageList/useMessageList';
+import type { MessageType } from 'stores/messageList/messageList';
+import useUnreadMessage from 'stores/unreadMessage/useUnreadMessage';
+import type { UnreadMessageType } from 'stores/unreadMessage/unreadMessage';
 
 export {
   useUserInfo,
@@ -25,4 +29,8 @@ export {
   GoodsSimpleType,
   useGoodsCategoryList,
   GoodsCategoryType,
+  useMessageList,
+  MessageType,
+  useUnreadMessage,
+  UnreadMessageType,
 };
