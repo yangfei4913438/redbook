@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo } from 'react';
-import { Dimensions, FlatList, Image, ListRenderItem, Text, View } from 'react-native';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import { Dimensions, FlatList, Image, ListRenderItem, Text, TouchableOpacity, View } from 'react-native';
 import { useGoodsList, useGoodsCategoryList } from 'stores';
 import type { GoodsSimpleType } from 'stores';
 
@@ -7,12 +7,16 @@ import icon_search from 'assets/icon_search.png';
 import icon_shop_car from 'assets/icon_shop_car.png';
 import icon_orders from 'assets/icon_orders.png';
 import icon_menu_more from 'assets/icon_menu_more.png';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const { width: screenWidth } = Dimensions.get('window');
 
 const Shop = () => {
   const { goodsList, requestGoodsList } = useGoodsList();
   const { goodsCategoryList, requestGoodsCategoryList } = useGoodsCategoryList();
+  // 路由相关
+  const navigation = useNavigation<StackNavigationProp<any>>();
 
   useEffect(() => {
     // 请求列表数据
@@ -23,19 +27,27 @@ const Shop = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const onSearchPress = useCallback(() => {
+    navigation.push('SearchGoods');
+  }, [navigation]);
+
   const renderTitle = useMemo(() => {
     return (
       <View className="w-full h-10 flex-row items-center space-x-1.5 px-4">
-        <View className="flex-row h-full items-center flex-1 bg-primary rounded-4 px-4 space-x-1.5">
+        <TouchableOpacity
+          className="flex-row h-full items-center flex-1 bg-primary rounded-4 px-4 space-x-1.5"
+          activeOpacity={0.7}
+          onPress={onSearchPress}
+        >
           <Image source={icon_search} className="w-4 h-4" />
           <Text className="text-2 text-secondary">bm吊带</Text>
-        </View>
+        </TouchableOpacity>
         <Image source={icon_shop_car} className="w-5 h-5" />
         <Image source={icon_orders} className="w-5 h-5" />
         <Image source={icon_menu_more} className="w-5 h-5" />
       </View>
     );
-  }, []);
+  }, [onSearchPress]);
 
   const renderHeader = useMemo(() => {
     return (

@@ -6,6 +6,7 @@ import Welcome from 'pages/welcome';
 import Login from 'pages/login';
 import MainTab from 'pages/mainTab';
 import ArticleDetail from 'pages/articleDetail';
+import SearchGoods from 'pages/shop/searchGoods';
 
 const Stack = createStackNavigator();
 
@@ -40,6 +41,14 @@ const Navigation = () => {
           options={{
             headerShown: false,
             ...TransitionPresets.SlideFromRightIOS, // IOS风格的动画
+          }}
+        />
+        <Stack.Screen
+          name="SearchGoods" // 商品搜索页
+          component={SearchGoods}
+          options={{
+            headerShown: false,
+            presentation: 'transparentModal', // 无感切换到当前页面，当前页面的背景色需要设置透明色
           }}
         />
       </Stack.Navigator>
