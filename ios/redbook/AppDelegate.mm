@@ -1,4 +1,5 @@
 #import "AppDelegate.h"
+#import "RCTPushy.h"  // <-- import头文件，注意要放到if条件外面
 
 #import <React/RCTBundleURLProvider.h>
 
@@ -19,7 +20,8 @@
 #if DEBUG
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
 #else
-  return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  // return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  return [RCTPushy bundleURL];
 #endif
 }
 
