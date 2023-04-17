@@ -118,7 +118,7 @@ const Login = () => {
   const renderInputLogin = useMemo(() => {
     return (
       <View className="w-full h-full flex-col items-center px-12">
-        <Text className="text-3xl font-bold mt-16 text-[#333]">密码登陆</Text>
+        <Text className="text-3xl font-bold mt-16 text-red-500">密码登陆</Text>
         <Text className="text-sm mt-1.5 text-[#bbb]">未注册的手机号登陆成功后将自动注册</Text>
         <View className="mt-4 w-full h-16 flex-row items-center border-b border-[#ddd]">
           <Text className="text-2xl text-[#999]">+86</Text>
