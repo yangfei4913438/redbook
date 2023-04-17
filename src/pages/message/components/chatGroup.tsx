@@ -27,7 +27,7 @@ const ChatGroup = () => {
 
       <MenuModel ref={modelRef}>
         <TouchableOpacity
-          className="w-full h-full bg-transparent"
+          className="w-full h-full bg-transparent-60"
           onPress={() => {
             modelRef.current?.hide();
           }}

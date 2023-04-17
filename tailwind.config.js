@@ -58,7 +58,16 @@ module.exports = {
         xhs: '#ff2442', // 小红书主色调
         primary: '#f0f0f0', // 主要背景色
         secondary: '#eee', // 次要背景色
-        transparent: '#00000060', // 透明背景
+        transparent: '#00000000', // 透明背景
+        'transparent-10': '#00000010', // 透明背景
+        'transparent-20': '#00000020', // 透明背景
+        'transparent-30': '#00000030', // 透明背景
+        'transparent-40': '#00000040', // 透明背景
+        'transparent-50': '#00000050', // 透明背景
+        'transparent-60': '#00000060', // 透明背景
+        'transparent-70': '#00000070', // 透明背景
+        'transparent-80': '#00000080', // 透明背景
+        'transparent-90': '#00000090', // 透明背景
       },
       borderRadius: size,
       fontSize: size,

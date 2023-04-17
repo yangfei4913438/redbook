@@ -42,7 +42,7 @@ const CategoryModel = forwardRef<CategoryModelResult, CategoryModelProps>(
       >
         <View className="w-full h-full" style={style}>
           <View className="w-full h-[80%]">{children}</View>
-          <View className="w-full h-[20%] bg-transparent" />
+          <View className="w-full h-[20%] bg-transparent-60" />
         </View>
       </Modal>
     );
