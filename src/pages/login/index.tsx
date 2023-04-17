@@ -118,13 +118,13 @@ const Login = () => {
   const renderInputLogin = useMemo(() => {
     return (
       <View className="w-full h-full flex-col items-center px-12">
-        <Text className="text-3xl font-bold mt-16 text-red-500">密码登陆</Text>
+        <Text className="text-3xl font-bold mt-16 text-primary">密码登陆</Text>
         <Text className="text-sm mt-1.5 text-[#bbb]">未注册的手机号登陆成功后将自动注册</Text>
         <View className="mt-4 w-full h-16 flex-row items-center border-b border-[#ddd]">
-          <Text className="text-2xl text-[#999]">+86</Text>
+          <Text className="text-2xl text-secondary">+86</Text>
           <Image source={icon_triangle} className="w-3 h-1.5 ml-1.5 mt-1" />
           <TextInput
-            className="flex-1 h-16 text-start pl-4 text-2xl text-[#333]"
+            className="flex-1 h-16 text-start pl-4 text-2xl text-primary"
             style={{ textAlignVertical: 'center' }}
             placeholderTextColor={'#999'}
             placeholder={'请输入手机号码'}
@@ -138,7 +138,7 @@ const Login = () => {
         </View>
         <View className="mt-2 w-full h-16 flex-row items-center border-b border-[#ddd]">
           <TextInput
-            className="flex-1 h-16 text-start pr-4 text-2xl text-[#333]"
+            className="flex-1 h-16 text-start pr-4 text-2xl text-primary"
             style={{ textAlignVertical: 'center' }}
             placeholderTextColor={'#999'}
             placeholder={'请输入密码'}
