@@ -117,15 +117,19 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file(MYAPP_RELEASE_STORE_FILE)
+            keyAlias MYAPP_RELEASE_KEY_ALIAS
+            storePassword MYAPP_RELEASE_STORE_PASSWORD
+            keyPassword MYAPP_RELEASE_KEY_PASSWORD
+        }
     }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             // 添加下面这行以禁用crunch
